@@ -1,0 +1,122 @@
+
+package controller;
+
+
+import ejb.GestionnaireUsersLocal;
+import java.io.IOException;
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet(name = "Controller", urlPatterns = {"/Controller"})
+public class Controller extends HttpServlet {
+    
+    @EJB
+    private GestionnaireUsersLocal cUser;
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+
+     //String url = "/WEB-INF/jspPinConnexion.jsp";
+     String url = "/WEB-INF/jspHR.jsp";
+        
+//<editor-fold defaultstate="collapsed" desc="Test">
+//System.out.println("avant addUser");
+//      cUser.addUser("1234", "Jean Peuplu", true, true, true, true);
+//      cUser.addUser("4321", "Ohmar Matuer", false, false, true, true);
+//      cUser.addUser("9876", "Fred Tequib", false, true, false, true);
+//System.out.println("après addUser");
+//
+//
+//System.out.println("avant removeUser");
+//        cm.removeUser(cm.findUser("4321"));
+//System.out.println("après removeUser");
+//
+//System.out.println("avant alterUser");
+//        cm.AlterUser("9876", "Sylvain", true, true, true, true);
+//System.out.println("après alterUser");
+//
+//
+//        HttpSession session = request.getSession();
+//        session.setAttribute("listeUser", cm.loadUsers(true)); // fonctionne
+//
+//
+//System.out.println("tout est OK !!! ");
+//
+//</editor-fold>
+        String msg = null;
+        String pin = request.getParameter("pin");
+        String welcome = null;
+        
+        if (request.getParameter("doIt") == null) {
+                msg = "";
+            }
+        
+        if  (request.getParameter("doIt") != null)
+                {
+                   if (cUser.findUser(pin) == null){
+                        msg = "Erreur de code Pin !!!";
+                }else{                         
+                        request.setAttribute("User",cUser.findUser(pin));
+                        System.out.println(request.getAttribute("User"));
+                        welcome = request.getParameter("User");
+                        url = "/WEB-INF/jspHR.jsp";
+                    }   
+                }
+        
+        request.setAttribute("msg", msg);
+        HttpSession session = request.getSession();
+        session.setAttribute("listeUser", cUser.loadUsers(true));
+        request.getRequestDispatcher(url).include(request, response);
+        
+
+    }
+            
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
