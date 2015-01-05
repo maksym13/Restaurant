@@ -27,7 +27,7 @@ public class Controller extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
      //String url = "/WEB-INF/jspPinConnexion.jsp";
-     String url = "/WEB-INF/jspHR.jsp";
+     String url = "/WEB-INF/jspPinConnexion.jsp";
         
 //<editor-fold defaultstate="collapsed" desc="Test">
 //System.out.println("avant addUser");
@@ -54,25 +54,39 @@ public class Controller extends HttpServlet {
 //System.out.println("tout est OK !!! ");
 //
 //</editor-fold>
-        String msg = null;
+        String msg = "";
         String pin = request.getParameter("pin");
-        String welcome = null;
+        String welcome;
         
-        if (request.getParameter("doIt") == null) {
-                msg = "";
-            }
+        HttpSession session = request.getSession();
         
-        if  (request.getParameter("doIt") != null)
-                {
-                   if (cUser.findUser(pin) == null){
-                        msg = "Erreur de code Pin !!!";
-                }else{                         
-                        request.setAttribute("User",cUser.findUser(pin));
-                        System.out.println(request.getAttribute("User"));
-                        welcome = request.getParameter("User");
+        
+//        if (request.getParameter("doIt") == null) 
+//            {
+//                msg = "";
+//            }        
+        
+        if  (request.getParameter("doIt") != null) // identification
+            {
+                Users u = cUser.findUser(request.getParameter("pin"));
+
+                if (u != null && u.getActive()) 
+                    {
+//                            request.setAttribute("User",cUser.findUser(pin));
+                        session.setAttribute("User",u);
+//                            System.out.println(request.getAttribute("User"));
+//                            welcome = request.getParameter("User");
                         url = "/WEB-INF/jspHR.jsp";
+                    }
+                else if (u == null)
+                    {
+                        msg = "Erreur de code Pin !!!";
+                    }
+                else
+                    {                         
+                        msg = "Cet utilsateur n'existe pas ! ";
                     }   
-                }
+            }
        
     //System.out.println("avant addUser");
     //      cUser.addUser("1234", "Jean Peuplu", true, true, true, true);
@@ -109,7 +123,6 @@ public class Controller extends HttpServlet {
         
         
         request.setAttribute("msg", msg);
-        HttpSession session = request.getSession();
         session.setAttribute("listeUser", cUser.loadUsers(true));
         request.getRequestDispatcher(url).include(request, response);
         

@@ -100,8 +100,6 @@ System.out.println("User ajouter");
        return true;
    }
    
-   
-   
     @Override
   public Users findUser (String argPin)
   {      
