@@ -39,5 +39,5 @@ public interface GestionnaireUsersLocal {
 
     public HashMap<String, Users> getListUser();
 
-    
+
 }

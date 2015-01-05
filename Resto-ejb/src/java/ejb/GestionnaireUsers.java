@@ -72,15 +72,15 @@ public class GestionnaireUsers implements GestionnaireUsersLocal {
        
    }
    
-      
- 
- 
+       
+   
+   
    
    
     @Override
    public void addUser (String pin, String nom, Boolean HR, Boolean caissier , Boolean chef, Boolean serveur)
         {
-             Users ajouterUser = new Users(pin, nom, true, true, true, true, true);
+             Users ajouterUser = new Users(pin, nom, HR, caissier, chef, serveur, true);
              em.persist(ajouterUser);
 
      //      listUser.put(pin, ajouterUser);
@@ -167,6 +167,8 @@ System.out.println("User ajouter");
   }
   
 //</editor-fold>
+
+  
   
   
 }

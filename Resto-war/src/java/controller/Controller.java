@@ -3,6 +3,8 @@ package controller;
 
 
 import ejb.GestionnaireUsersLocal;
+import entities.Users;
+
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -36,11 +38,12 @@ public class Controller extends HttpServlet {
 //
 //
 //System.out.println("avant removeUser");
-//        cm.removeUser(cm.findUser("4321"));
+//       cUser.removeUser(cUser.findUser("Pin"));
 //System.out.println("après removeUser");
 //
 //System.out.println("avant alterUser");
-//        cm.AlterUser("9876", "Sylvain", true, true, true, true);
+//        cUser.AlterUser("9876", "Sylvain", false, false, false, true);
+//        cUser.AlterUser("4321", "Ohmar Matuer", false, false, true, true);    
 //System.out.println("après alterUser");
 //
 //
@@ -70,6 +73,40 @@ public class Controller extends HttpServlet {
                         url = "/WEB-INF/jspHR.jsp";
                     }   
                 }
+       
+    //System.out.println("avant addUser");
+    //      cUser.addUser("1234", "Jean Peuplu", true, true, true, true);
+    //      cUser.addUser("4321", "Ohmar Matuer", false, false, true, true);
+    //      cUser.addUser("9876", "Fred Tequib", false, true, false, true);
+    //System.out.println("après addUser");
+        
+        if (request.getParameter("doIt2")!=null)
+        {
+            System.out.println(request.getParameter("Pin"));
+            System.out.println(request.getParameter("Nom"));
+            System.out.println(Boolean.valueOf(request.getParameter("RH")));
+            System.out.println(Boolean.valueOf(request.getParameter("Caissier")));
+            System.out.println(Boolean.valueOf(request.getParameter("Chef")));
+            System.out.println(Boolean.valueOf(request.getParameter("Serveur")));
+        //    System.out.println(request.getParameter("Serveur"));
+            
+            cUser.addUser(request.getParameter("Pin"), 
+                          request.getParameter("Nom"), 
+                          Boolean.valueOf(request.getParameter("RH")),
+                          Boolean.valueOf(request.getParameter("Caissier")),
+                          Boolean.valueOf(request.getParameter("Chef")),
+                          Boolean.valueOf(request.getParameter("Serveur"))
+                          );
+        }
+        
+        if (request.getParameter("remove")!=null)
+        {    
+ System.out.println("avant désactivation");
+            cUser.removeUser((cUser.findUser(request.getParameter("Pin"))));
+// System.out.println(request.getParameter(cUser.findUser(request.getParameter("Nom")) + " est bien désactivé"));
+      
+        }
+        
         
         request.setAttribute("msg", msg);
         HttpSession session = request.getSession();
