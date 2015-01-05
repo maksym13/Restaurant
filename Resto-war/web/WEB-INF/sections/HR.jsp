@@ -11,7 +11,7 @@
         <%--<FORM class="selfCSS" ACTION='Controller?' METHOD='POST'>--%>    
         <!--<fieldset>-->  
         <!--</fieldset>-->  
-            <legend>Ressource Humaine</legend>                        
+                                  
             <title>jQuery UI Tabs - Vertical Tabs functionality</title>
             <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
             <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -33,7 +33,8 @@
             </style>
     </head>
     <body>          
-        <fieldset>  
+        <fieldset>
+                <legend>Ressource Humaine</legend>  
                 <div id="tabs">
                     <ul>
                         <li><a href="#tabs-1">Liste user</a></li>
@@ -77,9 +78,9 @@
                 <div id="tabs-3">
                             <h2>Ajouter un User</h2>
                     <fieldset>  
-                        <legend>Ajouter un Employe</legend>    
+                        <!--<legend>Ajouter un Employe</legend>-->    
                         <p><label id="Nom">Nom:
-                                <input type="text" placeholder="Nom" id="Nom" name="Nom" value="" /></label>
+                            <input type="text" placeholder="Nom" id="Nom" name="Nom" value="" /></label>
                             <label id="Pin">Pin:</label>
                             <input type="password" placeholder="Pin" name="Pin" value="" size="5"/></p>
 

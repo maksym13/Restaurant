@@ -1,16 +1,37 @@
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Page d accueil</title>
+        
+        <script type="text/javascript">            
+//            var authServer = <%--${session.user.serveur}; --%>
+                var authServer = false;
+            
+            function showButtons()
+                {
+//                    alert("dans le javascript");
+                    if (!authServer) 
+                        {
+//                            alert("dans le if javascript");
+                            document.getElementById("serveur").style.visibility = "hidden";
+                        }
+                    //utilssateur se logg et pwd OK
+                    //verification du niveau d autorisation
+                    //affichage du boutton si autoriser
+                }
+        </script> 
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body onload="showButtons();">
+        <h1>Welcome</h1>
+        
+        <input id="serveur" type="submit" value="Serveur"/>
+        <input id="cuisine" type="submit" value="Chef" />
+        <input id="rh" type="submit" value="RH" />
+        <input id="caissier" type="submit" value="Caissier" />
+        <br><br>
+        <input id="OK" type="submit" value="OK" onclick="showButtons();"/>
+        
     </body>
 </html>

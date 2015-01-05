@@ -60,23 +60,15 @@ public class Controller extends HttpServlet {
         
         HttpSession session = request.getSession();
         
-        
-//        if (request.getParameter("doIt") == null) 
-//            {
-//                msg = "";
-//            }        
-        
-        if  (request.getParameter("doIt") != null) // identification
+        // IDENTIFICATION
+        if  (request.getParameter("doIt") != null)
             {
-                Users u = cUser.findUser(request.getParameter("pin"));
+                Users u = cUser.findUser(pin);
 
                 if (u != null && u.getActive()) 
                     {
-//                            request.setAttribute("User",cUser.findUser(pin));
-                        session.setAttribute("User",u);
-//                            System.out.println(request.getAttribute("User"));
-//                            welcome = request.getParameter("User");
-                        url = "/WEB-INF/jspHR.jsp";
+                        session.setAttribute("user",u);
+                        url = "/WEB-INF/main.jsp";
                     }
                 else if (u == null)
                     {
