@@ -1,21 +1,22 @@
 /* Général ------------------------------------------------------------------------------------- */
 
-body, p, legend, label, input {
+/*body, p, legend, label, input {
     font: normal 8pt verdana, helvetica, sans-serif;
     
-}
+}*/
 
-fieldset {
+/*fieldset {
     padding: 100px;
     border: 1px #0568CD solid;  
      
-}
+}*/
 
 legend {
     font-weight: bold;
     color: #0568CD;
     
 }
+
 
 /* Forms --------------------------------------------------------------------------------------- */
 
@@ -40,15 +41,13 @@ form .requis {
 }
 
 form {
-    position: relative;
-    top: 15em;
-    
-    
+    //position: relative;
+    top: 15em; 
     
 }
 
 .selfCSS { 
-  position: relative; 
+  //position: relative; 
   top: 21em; 
   //left: 15em; 
   //right: auto; 
@@ -62,7 +61,37 @@ form {
   
   color: #000000; 
   margin-left: 200px;
-  
- 
 }
 
+.ui-tabs-vertical 
+{ width: 55em; }
+
+.ui-tabs-vertical .ui-tabs-nav 
+{ padding: .2em .1em .2em .2em; 
+  float: left; width: 12em; }
+
+.ui-tabs-vertical .ui-tabs-nav li 
+{ clear: left; 
+  width: 100%; 
+  border-bottom-width: 1px !important; 
+  border-right-width: 0 !important; 
+  margin: 0 -1px .2em 0; 
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a 
+{ 
+    display:block; 
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active 
+{ padding-bottom: 0; 
+  padding-right: .1em; 
+  border-right-width: 1px; 
+  border-right-width: 1px; 
+}
+
+.ui-tabs-vertical .ui-tabs-panel 
+{ padding: 1em; 
+  float: right; 
+  width: 40em;
+}

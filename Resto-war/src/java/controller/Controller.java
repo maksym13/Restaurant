@@ -27,7 +27,7 @@ public class Controller extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
      //String url = "/WEB-INF/jspPinConnexion.jsp";
-     String url = "/WEB-INF/jspPinConnexion.jsp";
+     String url = "/WEB-INF/connexion.jsp";
         
 //<editor-fold defaultstate="collapsed" desc="Test">
 //System.out.println("avant addUser");
@@ -69,6 +69,7 @@ public class Controller extends HttpServlet {
                     {
                         session.setAttribute("user",u);
                         url = "/WEB-INF/main.jsp";
+//                        url = "/WEB-INF/sections/RHbis.jsp";
                     }
                 else if (u == null)
                     {
@@ -79,7 +80,7 @@ public class Controller extends HttpServlet {
                         msg = "Cet utilsateur n'existe pas ! ";
                     }   
             }
-       
+
     //System.out.println("avant addUser");
     //      cUser.addUser("1234", "Jean Peuplu", true, true, true, true);
     //      cUser.addUser("4321", "Ohmar Matuer", false, false, true, true);
@@ -113,9 +114,24 @@ public class Controller extends HttpServlet {
       
         }
         
+               // Déconnection
+        if (request.getParameter("Controller?doIt3") !=null) 
+        {
+System.out.println("logout");
+              
+            url = "/WEB-INF/connexion.jsp"; 
+        }
+        
+        
+        if (request.getParameter("section") != null 
+                && request.getParameter("section").equals("RH"))
+        {
+            url="/WEB-INF/sections/RHbis.jsp";
+        }
         
         request.setAttribute("msg", msg);
         session.setAttribute("listeUser", cUser.loadUsers(true));
+//        request.getRequestDispatcher(url).include(request, response);
         request.getRequestDispatcher(url).include(request, response);
         
 
